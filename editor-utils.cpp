@@ -3,9 +3,19 @@
 #include "headers/editor-utils.h"
 #include "headers/utils.h"
 
+#define ctrl(x) (x & 0x1F)
+
 void initialize_screen(int* screen) {
-    select_draw_function(*screen);
-    refresh();
+    while (true) {
+        select_draw_function(*screen);
+        refresh();
+        char c = getch();
+        if (c == ctrl('c'))
+            break;
+        if (c == ctrl('n') || c == ctrl('N'))
+            *screen = 1;
+        clear();
+    }
 }
 
 void welcome_screen() {
