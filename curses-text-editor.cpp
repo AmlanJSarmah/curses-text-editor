@@ -1,8 +1,17 @@
-﻿#include "headers/utils.h"
-using namespace std;
+﻿#include <curses.h>
+#include "headers/editor-utils.h"
+
+int screen = 1;
 
 int main()
 {
-	initialize_screen();
+    initscr();
+    raw();
+    noecho();
+
+    initialize_screen(&screen);
+
+    getch();
+    endwin();
 	return 0;
 }
