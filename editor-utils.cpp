@@ -3,18 +3,14 @@
 #include "headers/editor-utils.h"
 #include "headers/utils.h"
 
-#define ctrl(x) (x & 0x1F)
 
 void initialize_screen(int* screen) {
-    while (true) {
-        select_draw_function(*screen);
-        refresh();
+    select_draw_function(*screen);
+    refresh();
+    bool is_active = true;
+    while (is_active) {
         char c = getch();
-        if (c == ctrl('c'))
-            break;
-        if (c == ctrl('n') || c == ctrl('N'))
-            *screen = 1;
-        clear();
+        handle_events(c, screen, &is_active);
     }
 }
 
