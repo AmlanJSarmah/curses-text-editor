@@ -17,13 +17,25 @@ void select_draw_function(int screen) {
 	}
 }
 
-void handle_events(char c, int* screen, bool* is_active) {
-	if (c == ctrl('c'))
+void handle_events(int c, int* screen, bool* is_active) {
+	switch (c) {
+	case KEY_RESIZE:
+		clear();
+		select_draw_function(*screen);
+		refresh();
+		break;
+	case ctrl('c'):
 		*is_active = false;
-	if ((c == ctrl('n') || c == ctrl('N')) && *screen == 0) {
+		break;
+	case ctrl('n'):
+		if (*screen == 1)
+			break;
 		*screen = 1;
 		clear();
 		select_draw_function(*screen);
 		refresh();
+		break;
+	default:
+		break;
 	}
 }

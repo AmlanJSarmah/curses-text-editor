@@ -9,7 +9,7 @@ void initialize_screen(int* screen) {
     refresh();
     bool is_active = true;
     while (is_active) {
-        char c = getch();
+        int c = getch();
         handle_events(c, screen, &is_active);
     }
 }
@@ -18,7 +18,7 @@ void welcome_screen() {
     int y_max, x_max;
     getmaxyx(stdscr, y_max, x_max);
     std::string welcome_mesage = "Welcome to Curses Text Editor";
-    std::string options = "Press 'Ctrl + N' for new empty file";
+    std::string options = "Press 'Ctrl + n' for new empty file";
     int len_welcome_message = welcome_mesage.length();
     mvprintw((y_max / 2) - 2, (x_max / 2 - len_welcome_message / 2), welcome_mesage.c_str());
     mvprintw((y_max / 2), (x_max / 2 - len_welcome_message / 2) - 3, options.c_str());
