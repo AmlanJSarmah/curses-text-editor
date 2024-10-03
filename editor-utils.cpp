@@ -3,7 +3,6 @@
 #include "headers/editor-utils.h"
 #include "headers/utils.h"
 
-
 void initialize_screen(int* screen) {
     select_draw_function(*screen);
     refresh();

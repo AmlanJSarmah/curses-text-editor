@@ -1,8 +1,7 @@
 #include <curses.h>
 #include "headers/editor-utils.h"
 #include "headers/utils.h"
-
-#define ctrl(x) (x & 0x1F)
+#include "headers/curses-text-editor.h"
 
 void select_draw_function(int screen) {
 	switch (screen) {

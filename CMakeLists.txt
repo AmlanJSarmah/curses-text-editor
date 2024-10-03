@@ -8,7 +8,7 @@ endif()
 project ("curses-text-editor")
 find_package(Curses REQUIRED)
 include_directories(${PROJECT_SOURCE_DIR}/headers)
-add_executable (curses-text-editor "curses-text-editor.cpp" "headers/editor-utils.h" "editor-utils.cpp"  "headers/utils.h" "utils.cpp")
+add_executable (curses-text-editor "curses-text-editor.cpp" "headers/editor-utils.h" "editor-utils.cpp"  "headers/utils.h" "utils.cpp" "headers/curses-text-editor.h")
 target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
