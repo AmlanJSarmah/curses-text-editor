@@ -2,14 +2,15 @@
 #include <iostream>
 #include "headers/editor-utils.h"
 #include "headers/utils.h"
+#include "headers/curses-text-editor.h"
 
-void initialize_screen(int* screen) {
-    select_draw_function(*screen);
+void initialize_screen() {
+    select_draw_function(screen);
     refresh();
     bool is_active = true;
     while (is_active) {
         int c = getch();
-        handle_events(c, screen, &is_active);
+        handle_events(c, &is_active);
     }
 }
 
