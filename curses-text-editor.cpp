@@ -5,7 +5,8 @@
 #include "headers/curses-text-editor.h"
 
 int screen = 0;
-int tracker = 0;
+int cursor_x = EDITOR_ROW_START;
+int cursor_y = 0;
 std::vector<std::string> lines;
 
 int main()

@@ -9,6 +9,10 @@ void initialize_screen() {
     refresh();
     bool is_active = true;
     while (is_active) {
+        if (screen == 0)
+            curs_set(0);
+        else
+            curs_set(2);
         int c = getch();
         handle_events(c, &is_active);
     }
@@ -27,9 +31,7 @@ void welcome_screen() {
 void draw_rows() {
     int y_max, x_max;
     getmaxyx(stdscr, y_max, x_max);
-    for (int i = 0; i < y_max; i++) {
-        move(i, 0);
-        printw("%d", i);
-    }
-    move(0, 1);
+    for (int i = 0; i < y_max; i++) 
+        mvprintw(i, 0, "%d", i);
+    move(cursor_y, cursor_x);
 }
