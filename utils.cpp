@@ -51,6 +51,11 @@ void handle_events(int c, bool* is_active) {
 			move(cursor_y, --cursor_x);
 		break;
 	default:
+		lines.push_back("");
+		lines[0] += std::to_string((char)c);
+		for(int i = 0; i < lines[0].length(); i++)
+			printw("%c", (char)lines[0][i]);
+		refresh();
 		break;
 	}
 }
