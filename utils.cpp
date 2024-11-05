@@ -16,7 +16,17 @@ void select_draw_function(int screen) {
 	}
 }
 
+void print_characters(int tracker)
+{
+	clear();
+	draw_rows();
+	for (int i = 0; i < lines[tracker].size(); i++)
+		printw("%c", lines[tracker].at(i));
+	refresh();
+}
+
 void handle_events(int c, bool* is_active) {
+	int tracker = 0;
 	switch (c) {
 	case KEY_RESIZE:
 		clear();
@@ -39,7 +49,7 @@ void handle_events(int c, bool* is_active) {
 			move(--cursor_y, cursor_x);
 		break;
 	case KEY_DOWN:
-		if (cursor_y < getmaxy(stdscr) - 1)
+		if (cursor_y < getmaxy(stdscr) - 1 && cursor_y < lines.size())
 			move(++cursor_y, cursor_x);
 		break;
 	case KEY_RIGHT:
@@ -50,15 +60,17 @@ void handle_events(int c, bool* is_active) {
 		if (cursor_x > EDITOR_ROW_START)
 			move(cursor_y, --cursor_x);
 		break;
+	case KEY_BACKSPACE:
+		if (lines.size() != 0 && lines[tracker].size() != 0) {
+			lines[tracker].pop_back();
+			print_characters(tracker);
+		}
+		break;
 	default:
-		clear();
-		draw_rows();
 		if (lines.size() == 0)
 			lines.push_back("");
-		lines[0].push_back((char)c);
-		for (int i = 0; i < lines[0].size(); i++)
-			printw("%c", lines[0].at(i));
-		refresh();
+		lines[tracker].push_back((char)c);
+		print_characters(tracker);
 		break;
 	}
 }
